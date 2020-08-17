@@ -9,7 +9,9 @@ services:
       - "9200:9200"
       - "9300:9300"
     environment:
-      ES_JAVA_OPTS: "-Xmx256m -Xms256m -Duser.timezone=Europe/Rome"
+      - "discovery.type=single-node"
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data:rw
         
   logstash:
     image: docker.elastic.co/logstash/logstash:7.8.0
@@ -22,7 +24,7 @@ services:
       - "5000:5000"
       - "9600:9600"
     environment:
-      LS_JAVA_OPTS: "-Xmx256m -Xms256m -Duser.timezone=Europe/Rome "
+      LS_JAVA_OPTS: "-Duser.timezone=Europe/Rome "
     depends_on:
       - elasticsearch
 
@@ -36,4 +38,8 @@ services:
       LS_JAVA_OPTS: "-Duser.timezone=Europe/Rome "
     depends_on:
       - elasticsearch
+      
+volumes:
+    esdata1:
+      driver: local
 
