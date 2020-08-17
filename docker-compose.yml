@@ -18,7 +18,6 @@ services:
     command: --debug -f /etc/logstash/conf.d/
     volumes:
       - ./containers/logstash/logstash.conf:/etc/logstash/conf.d/logstash.conf
-      - C:/DEVELOPMENT/apps/logging-service/logs/app1.log:/home/logs/app1.log
     ports:
       - "5000:5000"
       - "9600:9600"
